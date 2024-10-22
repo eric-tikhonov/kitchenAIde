@@ -1,0 +1,1 @@
+This project showcases a dynamic, responsive To-Do List application built with React, designed to be hosted on AWS. It's a perfect practice ground for diving into specific AWS services like Lambda, DynamoDB, and Amplify.
