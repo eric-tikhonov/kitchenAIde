@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_URL } from "../utils";
 
 export const UpdateTaskForm = ({
-  fetchTasks,
+  editTaskListOnUpdate,
   isDialogOpen,
   setIsDialogOpen,
   task,
@@ -16,13 +16,15 @@ export const UpdateTaskForm = ({
   const handleUpdateTaskName = async () => {
     if (taskName === task.name) return;
     try {
-      await axios.put(API_URL, {
+      const updatedTask = {
         id,
         name: taskName,
         completed,
-      });
+      };
 
-      await fetchTasks();
+      await axios.put(API_URL, updatedTask);
+      editTaskListOnUpdate(updatedTask);
+      
       setTaskName(taskName);
     } catch (err) {
       console.log(err);

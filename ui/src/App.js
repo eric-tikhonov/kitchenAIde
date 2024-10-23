@@ -8,11 +8,7 @@ import { API_URL } from "./utils";
 import { PersistentDrawerLeft } from "./components/Drawer";
 import Stack from "@mui/material/Stack";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
+const darkTheme = createTheme({ palette: { mode: "dark" } });
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -20,15 +16,18 @@ export default function App() {
   const fetchTasks = async () => {
     try {
       const { data } = await axios.get(API_URL);
-
       setTasks(data);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const editTaskListOnUpdate = (updatedTask) => {
+    setTasks((prevTasks) => prevTasks.map((task) => task.id === updatedTask.id ? updatedTask : task));
+  };
+
   useEffect(() => {
-    fetchTasks();
+    fetchTasks(); // Calls fetchTasks only once on the initial load
   }, []);
 
   return (
@@ -38,7 +37,7 @@ export default function App() {
       <AddTaskInput fetchTasks={fetchTasks} />
       <Stack spacing={2}>
         {tasks.map((task) => (
-          <Task task={task} key={task.id} fetchTasks={fetchTasks} />
+          <Task task={task} key={task.id} editTaskListOnUpdate={editTaskListOnUpdate} />
         ))}
       </Stack>
     </ThemeProvider>

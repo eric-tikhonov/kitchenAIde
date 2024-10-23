@@ -7,7 +7,7 @@ import classnames from "classnames";
 import axios from "axios";
 import { API_URL } from "../utils";
 
-export const Task = ({ task, fetchTasks }) => {
+export const Task = ({ task, fetchTasks, editTaskListOnUpdate, tasks }) => {
   const { id, name, completed } = task;
   const [isComplete, setIsComplete] = useState(completed);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -57,6 +57,7 @@ export const Task = ({ task, fetchTasks }) => {
       </div>
       <UpdateTaskForm
         fetchTasks={fetchTasks}
+        editTaskListOnUpdate={editTaskListOnUpdate}
         isDialogOpen={isDialogOpen}
         setIsDialogOpen={setIsDialogOpen}
         task={task}
