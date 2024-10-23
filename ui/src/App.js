@@ -22,12 +22,18 @@ export default function App() {
     }
   };
 
-  const editTaskListOnUpdate = (updatedTask) => {
-    setTasks((prevTasks) => prevTasks.map((task) => task.id === updatedTask.id ? updatedTask : task));
+  const editTaskListOnUpdate = (updatedTask, deleted = false) => {
+    if (deleted) {
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== updatedTask.id));
+      return;
+    }
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
   };
 
   useEffect(() => {
-    fetchTasks(); // Calls fetchTasks only once on the initial load
+    fetchTasks();
   }, []);
 
   return (
