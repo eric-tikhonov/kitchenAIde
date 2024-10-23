@@ -29,8 +29,15 @@ export const UpdateTaskForm = ({
     }
   };
 
+  const handleKeyDown = async (e) => {
+    if (e.key === "Enter" && taskName.trim()) {
+      await handleUpdateTaskName();
+      setIsDialogOpen(false);
+    }
+  };
+
   return (
-    <Dialog open={isDialogOpen}>
+    <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
       <DialogTitle>Edit Task</DialogTitle>
       <div className="dialog">
         <TextField
@@ -39,6 +46,7 @@ export const UpdateTaskForm = ({
           variant="outlined"
           defaultValue={task.name}
           onChange={(e) => setTaskName(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <Button
           variant="contained"
@@ -46,6 +54,7 @@ export const UpdateTaskForm = ({
             await handleUpdateTaskName();
             setIsDialogOpen(false);
           }}
+          disabled={!taskName.length}
         >
           <CheckIcon />
         </Button>
