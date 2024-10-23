@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { AddTaskForm } from "./components/AddTaskForm";
+import { AddTaskInput } from "./components/AddTaskInput";
 import { Task } from "./components/Task";
 import axios from "axios";
 import { API_URL } from "./utils";
+import { PersistentDrawerLeft } from "./components/Drawer";
+import Stack from "@mui/material/Stack";
 
 const darkTheme = createTheme({
   palette: {
@@ -32,10 +34,13 @@ export default function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <AddTaskForm fetchTasks={fetchTasks} />
-      {tasks.map((task) => (
-        <Task task={task} key={task.id} fetchTasks={fetchTasks} />
-      ))}
+      <PersistentDrawerLeft lists={["List"]} />
+      <AddTaskInput fetchTasks={fetchTasks} />
+      <Stack spacing={2}>
+        {tasks.map((task) => (
+          <Task task={task} key={task.id} fetchTasks={fetchTasks} />
+        ))}
+      </Stack>
     </ThemeProvider>
   );
 }

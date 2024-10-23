@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 import { API_URL } from "../utils";
 
-export const AddTaskForm = ({ fetchTasks }) => {
+export const AddTaskInput = ({ fetchTasks }) => {
   const [newTask, setNewTask] = useState("");
 
   const addNewTask = async () => {
@@ -14,27 +14,30 @@ export const AddTaskForm = ({ fetchTasks }) => {
         name: newTask,
         completed: false,
       });
-
       await fetchTasks();
-
       setNewTask("");
     } catch (err) {
       console.log(err);
     }
   };
 
+  const handleKeyDown = async (e) => {
+    if (e.key === 'Enter') {
+      await addNewTask();
+    }
+  };
+
   return (
     <div>
-      <Typography align="center" variant="h2" paddingTop={2} paddingBottom={2}>
-        My Task List
-      </Typography>
-      <div className="addTaskForm">
+      <div className="addTaskInput">
         <TextField
-          size="small"
-          label="Task"
+          fullWidth
+          size="medium"
+          label="Enter task"
           variant="outlined"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <Button
           disabled={!newTask.length}

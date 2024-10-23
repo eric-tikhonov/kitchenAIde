@@ -37,6 +37,7 @@ export const UpdateTaskForm = ({
           size="small"
           label="Task"
           variant="outlined"
+          defaultValue={task.name}
           onChange={(e) => setTaskName(e.target.value)}
         />
         <Button

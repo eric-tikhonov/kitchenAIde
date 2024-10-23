@@ -3,7 +3,7 @@ body {
   justify-content: center;
 }
 
-.addTaskForm {
+.addTaskInput {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -31,8 +31,31 @@ body {
 
 .flex {
   display: flex;
+  width: -webkit-fill-available;
+  overflow: auto;
 }
 
 .done {
   text-decoration: line-through;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  #root {
+    width: 90%;
+    margin: 0 5%;
+  }
+}
+
+@media (min-width: 769px) {
+  #root {
+    width: 80%;
+    margin: 0 10%;
+  }
 }
