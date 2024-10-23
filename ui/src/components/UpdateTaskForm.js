@@ -11,9 +11,10 @@ export const UpdateTaskForm = ({
   task,
 }) => {
   const { id, completed } = task;
-  const [taskName, setTaskName] = useState("");
+  const [taskName, setTaskName] = useState(task.name);
 
   const handleUpdateTaskName = async () => {
+    if (taskName === task.name) return;
     try {
       await axios.put(API_URL, {
         id,
@@ -22,8 +23,7 @@ export const UpdateTaskForm = ({
       });
 
       await fetchTasks();
-
-      setTaskName("");
+      setTaskName(taskName);
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +44,6 @@ export const UpdateTaskForm = ({
           variant="contained"
           onClick={async () => {
             await handleUpdateTaskName();
-            
             setIsDialogOpen(false);
           }}
         >
