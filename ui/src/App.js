@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { AddTaskInput } from "./components/AddTaskInput";
@@ -13,28 +13,29 @@ const darkTheme = createTheme({ palette: { mode: "dark" } });
 export default function App() {
   const [tasks, setTasks] = useState([]);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const { data } = await axios.get(API_URL);
       setTasks(data);
     } catch (err) {
       console.log(err);
     }
-  };
+  }, []);
 
-  const editTaskListOnUpdate = (updatedTask, deleted = false) => {
-    if (deleted) {
-      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== updatedTask.id));
-      return;
-    }
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
-    );
-  };
+  const editTaskListOnUpdate = useCallback((updatedTask, deleted = false) => {
+    setTasks((prevTasks) => {
+      if (deleted) {
+        return prevTasks.filter((task) => task.id !== updatedTask.id);
+      }
+      return prevTasks.map((task) =>
+        task.id === updatedTask.id ? updatedTask : task
+      );
+    });
+  }, []);
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -43,7 +44,11 @@ export default function App() {
       <AddTaskInput fetchTasks={fetchTasks} />
       <Stack spacing={2}>
         {tasks.map((task) => (
-          <Task task={task} key={task.id} editTaskListOnUpdate={editTaskListOnUpdate} />
+          <Task
+            task={task}
+            key={task.id}
+            editTaskListOnUpdate={editTaskListOnUpdate}
+          />
         ))}
       </Stack>
     </ThemeProvider>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -69,13 +69,13 @@ export const PersistentDrawerLeft = ({ lists }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const handleDrawerOpen = () => {
+  const handleDrawerOpen = useCallback(() => {
     setOpen(true);
-  };
+  }, []);
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -135,11 +135,10 @@ export const PersistentDrawerLeft = ({ lists }) => {
             <ListItem key={text} disablePadding>
               <ListItemButton selected>
                 <ListItemText primary={text} />
-                {/*
-                <ListItemIcon>
+                {/* Uncomment the following if you want to add a CloseIcon */}
+                {/* <ListItemIcon>
                   <CloseIcon />
-                </ListItemIcon>
-                */}
+                </ListItemIcon> */}
               </ListItemButton>
             </ListItem>
           ))}

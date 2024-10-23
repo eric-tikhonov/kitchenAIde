@@ -31,7 +31,7 @@ body {
 
 .flex {
   display: flex;
-  width: -webkit-fill-available;
+  width: 100%;
   overflow: auto;
 }
 
@@ -39,7 +39,9 @@ body {
   text-decoration: line-through;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   display: flex;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -8,7 +8,7 @@ import { API_URL } from "../utils";
 export const AddTaskInput = ({ fetchTasks }) => {
   const [newTask, setNewTask] = useState("");
 
-  const addNewTask = async () => {
+  const addNewTask = useCallback(async () => {
     try {
       await axios.post(API_URL, {
         name: newTask,
@@ -19,13 +19,16 @@ export const AddTaskInput = ({ fetchTasks }) => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [newTask, fetchTasks]);
 
-  const handleKeyDown = async (e) => {
-    if (e.key === 'Enter') {
-      await addNewTask();
-    }
-  };
+  const handleKeyDown = useCallback(
+    async (e) => {
+      if (e.key === "Enter" && newTask.trim()) {
+        await addNewTask();
+      }
+    },
+    [newTask, addNewTask]
+  );
 
   return (
     <div>
@@ -40,7 +43,7 @@ export const AddTaskInput = ({ fetchTasks }) => {
           onKeyDown={handleKeyDown}
         />
         <Button
-          disabled={!newTask.length}
+          disabled={!newTask.trim().length}
           variant="outlined"
           onClick={addNewTask}
         >
