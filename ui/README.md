@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Todo App
+This Todo App is a full-stack application leveraging AWS Lambda for backend operations and AWS Amplify for frontend deployment. The app allows users to manage their tasks efficiently, using a serverless architecture for scalability and ease of use.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+**Backend:**
 
-## Available Scripts
+AWS Lambda: Hosts the backend logic, encapsulated in a zip file containing the api folder.
 
-In the project directory, you can run:
+Express: Handles HTTP requests.
 
-### `npm start`
+DynamoDB: Stores and retrieves tasks via CRUD operations in ```task.js```.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Frontend:**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+React: UI components for managing tasks.
 
-### `npm test`
+AWS Amplify: Automates deployment, hosting, and integration of the frontend.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Structure
 
-### `npm run build`
+```
+├── api
+│   ├── index.js     # Express backend
+│   ├── task.js      # DynamoDB client and CRUD operations
+├── ui
+│   ├── src
+|   |   ├── components/  # React components
+|   |   ├── App.js       # React secondary root
+│   |   ├── index.css    # Styling
+│   |   ├── index.js     # React root
+│   |   ├── utils.js     # Store lambda url
+│   ├── package.json     # Dependencies
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
+**Backend Deployment (AWS Lambda)**
+Zip the api Folder:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ensure index.js and task.js are included in the zip file.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Upload to AWS Lambda:**
 
-### `npm run eject`
+Create a new Lambda function.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Upload the zip file.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Set up the Lambda handler to point to index.handler.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Environment Variables:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Configure environment variables for DynamoDB connection.
 
-## Learn More
+**Frontend Deployment (AWS Amplify)**
+Connect to GitHub:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Point AWS Amplify to the ui folder in your GitHub repository.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Configure Build Settings:**
 
-### Code Splitting
+Amplify detects the build settings from the package.json in the ui folder.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Deploy:**
 
-### Analyzing the Bundle Size
+Amplify deploys the React app and provides a URL for access.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Usage
+**Access the App:**
 
-### Making a Progressive Web App
+Navigate to the URL provided by Amplify to use the Todo App.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Manage Tasks:**
 
-### Advanced Configuration
+Add, update, delete, and view tasks seamlessly through the intuitive UI.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+AWS Services Used
+AWS Lambda: For serverless backend operations.
 
-### Deployment
+AWS DynamoDB: NoSQL database for storing tasks.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+AWS Amplify: Simplifies deployment and hosting of the frontend.
