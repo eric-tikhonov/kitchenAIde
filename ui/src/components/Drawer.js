@@ -80,7 +80,9 @@ export const PersistentDrawerLeft = ({ lists }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} color="primary" enableColorOnDark>
+      <AppBar position="fixed" open={open} sx={{
+        backgroundColor: "var(--navy) !important", opacity: 0.8, color: "var(--light-slate)", boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)"
+        }}>
         <Toolbar>
           <IconButton
             color="inherit"

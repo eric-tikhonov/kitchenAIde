@@ -131,37 +131,6 @@ body,
   color: var(--dark-slate);
 }
 
-.css-eopq3z-MuiPaper-root-MuiAppBar-root {
-  background-color: var(--navy) !important;
-  opacity: 0.8;
-  color: var(--light-slate);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.css-eopq3z-MuiPaper-root-MuiAppBar-root {
-  background-color: var(--navy) !important;
-  opacity: 0.8;
-  color: var(--light-slate);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.css-wn42hu-MuiPaper-root-MuiAppBar-root {
-  background-color: var(--navy) !important;
-  opacity: 0.8;
-  color: var(--light-slate);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.css-imrjgg-MuiButtonBase-root-MuiCheckbox-root {
-  color: unset !important;
-}
-
 .css-rizt0-MuiTypography-root {
   display: flex;
   justify-content: center;

@@ -33,7 +33,7 @@ export const Task = ({ task, fetchTasks, editTaskListOnUpdate }) => {
   return (
     <div className="task">
       <div className={classnames("flex", { done: isComplete })}>
-        <Checkbox checked={isComplete} onChange={handleUpdateTaskCompletion} />
+        <Checkbox style={{color: "unset !important"}}checked={isComplete} onChange={handleUpdateTaskCompletion} />
         <Typography
           noWrap
           variant="h4"
