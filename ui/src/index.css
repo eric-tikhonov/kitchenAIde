@@ -1,6 +1,31 @@
+*,
+::before,
+::after {
+  box-sizing: inherit;
+  user-select: none;
+}
+
 body {
   display: flex;
   justify-content: center;
+  background-color: linear-gradient(135deg, #ececec, #f7f7f7);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  flex: 1;
 }
 
 .addTaskInput {
@@ -15,6 +40,12 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  background-color: var(--navy) !important;
+  backdrop-filter: blur(10px);
+  opacity: 0.8;
+  color: #ececec;
+  padding: 10px;
+  border-radius: var(--border-radius);
 }
 
 .taskButtons {
@@ -37,15 +68,24 @@ body {
 
 .done {
   text-decoration: line-through;
+  color: var(--tan);
 }
 
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
+.MuiToolbar-root {
+  background-color: var(--navy) !important;
+  opacity: 0.8;
+  color: var(--light-slate);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.css-18m1npx-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
+  background-color: var(--navy) !important;
+  backdrop-filter: blur(10px);
+  opacity: 0.8;
+}
+
+.css-imrjgg-MuiButtonBase-root-MuiCheckbox-root {
+  color: unset;
 }
 
 @media (max-width: 768px) {
@@ -60,4 +100,80 @@ body,
     width: 80%;
     margin: 0 10%;
   }
+}
+
+:root {
+  --dark-slate: #1e293b;
+  --light-slate: #ccd6f6;
+  --lightest-slate: #e6f1ff;
+  --navy: #0a192f;
+  --tan: #d2b48c;
+  --border-radius: 8px;
+}
+
+.taskButtons .MuiButton-containedPrimary {
+  background-color: var(--light-slate);
+  color: var(--navy);
+}
+
+.taskButtons .MuiButton-containedPrimary:hover {
+  background-color: var(--tan);
+  color: var(--dark-slate);
+}
+
+.taskButtons .MuiButton-containedError {
+  background-color: var(--tan);
+  color: var(--navy);
+}
+
+.taskButtons .MuiButton-containedError:hover {
+  background-color: var(--light-slate);
+  color: var(--dark-slate);
+}
+
+.css-eopq3z-MuiPaper-root-MuiAppBar-root {
+  background-color: var(--navy) !important;
+  opacity: 0.8;
+  color: var(--light-slate);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.css-eopq3z-MuiPaper-root-MuiAppBar-root {
+  background-color: var(--navy) !important;
+  opacity: 0.8;
+  color: var(--light-slate);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.css-wn42hu-MuiPaper-root-MuiAppBar-root {
+  background-color: var(--navy) !important;
+  opacity: 0.8;
+  color: var(--light-slate);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.css-imrjgg-MuiButtonBase-root-MuiCheckbox-root {
+  color: unset !important;
+}
+
+.css-rizt0-MuiTypography-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.MuiTypography-root.MuiTypography-body1.MuiTypography-root.MuiTypography-body1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
 }

@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import { AddTaskInput } from "./components/AddTaskInput";
 import { Task } from "./components/Task";
 import axios from "axios";
 import { API_URL } from "./utils";
 import { PersistentDrawerLeft } from "./components/Drawer";
 import Stack from "@mui/material/Stack";
-
-const darkTheme = createTheme({ palette: { mode: "dark" } });
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -38,8 +34,7 @@ export default function App() {
   }, [fetchTasks]);
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
+    <div>
       <PersistentDrawerLeft lists={["List"]} />
       <AddTaskInput fetchTasks={fetchTasks} />
       <Stack spacing={2}>
@@ -51,6 +46,6 @@ export default function App() {
           />
         ))}
       </Stack>
-    </ThemeProvider>
+    </div>
   );
 }

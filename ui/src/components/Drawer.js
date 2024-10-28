@@ -125,7 +125,7 @@ export const PersistentDrawerLeft = ({ lists }) => {
               <ListItemIcon>
                 <FormatListBulletedIcon />
               </ListItemIcon>
-              <ListItemText primary={"My Lists"} />
+              <ListItemText style={{transform: "translateX(-24px)"}} primary={"My Lists"} />
             </ListItemButton>
           </ListItem>
         </List>
