@@ -12,7 +12,7 @@ export default function App() {
   const fetchTasks = useCallback(async () => {
     try {
       const { data } = await axios.get(API_URL);
-      const sortedTasks = data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      const sortedTasks = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Reverse order
       setTasks(sortedTasks);
     } catch (err) {
       console.log(err);
@@ -36,7 +36,7 @@ export default function App() {
       const updatedTasks = prevTasks.map((task) =>
         task.id === updatedTask.id ? updatedTask : task
       );
-      return updatedTasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      return updatedTasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Reverse order
     });
   }, []);
 
