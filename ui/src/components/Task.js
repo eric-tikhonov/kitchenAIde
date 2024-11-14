@@ -8,18 +8,19 @@ import axios from "axios";
 import { API_URL } from "../utils";
 
 export const Task = ({ task, fetchTasks, editTaskListOnUpdate }) => {
-  const { id, name, completed } = task;
+  const { id, name, completed, createdAt } = task;
   const [isComplete, setIsComplete] = useState(completed);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleUpdateTaskCompletion = useCallback(async () => {
     try {
-      await axios.put(API_URL, { id, name, completed: !isComplete });
+      await axios.put(API_URL, { id, name, completed: !isComplete, createdAt });
       setIsComplete((prev) => !prev);
+      editTaskListOnUpdate({ id, name, completed: !isComplete, createdAt });
     } catch (err) {
       console.log(err);
     }
-  }, [id, name, isComplete]);
+  }, [id, name, isComplete, createdAt, editTaskListOnUpdate]);
 
   const handleDeleteTask = useCallback(async () => {
     try {
