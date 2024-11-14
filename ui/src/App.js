@@ -37,7 +37,7 @@ export default function App() {
     <div>
       <PersistentDrawerLeft lists={["List"]} />
       <AddTaskInput fetchTasks={fetchTasks} />
-      <Stack spacing={2}>
+      <Stack className="listItems">
         {tasks.map((task) => (
           <Task
             task={task}

@@ -33,7 +33,11 @@ export const Task = ({ task, fetchTasks, editTaskListOnUpdate }) => {
   return (
     <div className="task">
       <div className={classnames("flex", { done: isComplete })}>
-        <Checkbox style={{color: "unset !important"}}checked={isComplete} onChange={handleUpdateTaskCompletion} />
+        <Checkbox
+          style={{ color: "unset !important" }}
+          checked={isComplete}
+          onChange={handleUpdateTaskCompletion}
+        />
         <Typography
           noWrap
           variant="h4"
@@ -42,6 +46,9 @@ export const Task = ({ task, fetchTasks, editTaskListOnUpdate }) => {
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             textAlign: "left",
+            flexGrow: 1,
+            alignSelf: "center",
+            fontSize: "1.125rem",
           }}
         >
           {name}

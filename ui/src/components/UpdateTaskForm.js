@@ -30,11 +30,11 @@ export const UpdateTaskForm = ({ editTaskListOnUpdate, isDialogOpen, setIsDialog
 
   return (
     <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-      <DialogTitle>Edit Task</DialogTitle>
+      <DialogTitle>Edit Ingredient</DialogTitle>
       <div className="dialog">
         <TextField
           size="small"
-          label="Task"
+          label="Ingredient"
           variant="outlined"
           defaultValue={task.name}
           onChange={(e) => setTaskName(e.target.value)}

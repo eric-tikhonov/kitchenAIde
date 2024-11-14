@@ -94,7 +94,7 @@ export const PersistentDrawerLeft = ({ lists }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            To Do
+            KitchenAIde
           </Typography>
         </Toolbar>
       </AppBar>
