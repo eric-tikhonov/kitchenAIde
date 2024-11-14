@@ -13,6 +13,7 @@ export const AddTaskInput = ({ fetchTasks }) => {
       await axios.post(API_URL, {
         name: newTask,
         completed: false,
+        createdAt: new Date().toISOString(),
       });
       await fetchTasks();
       setNewTask("");
@@ -31,25 +32,23 @@ export const AddTaskInput = ({ fetchTasks }) => {
   );
 
   return (
-    <div>
-      <div className="addTaskInput">
-        <TextField
-          fullWidth
-          size="medium"
-          label="Enter ingredients"
-          variant="outlined"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-        <Button
-          disabled={!newTask.trim().length}
-          variant="outlined"
-          onClick={addNewTask}
-        >
-          <AddIcon />
-        </Button>
-      </div>
+    <div className="addTaskInput">
+      <TextField
+        fullWidth
+        size="medium"
+        label="Enter task"
+        variant="outlined"
+        value={newTask}
+        onChange={(e) => setNewTask(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
+      <Button
+        disabled={!newTask.trim().length}
+        variant="outlined"
+        onClick={addNewTask}
+      >
+        <AddIcon />
+      </Button>
     </div>
   );
 };

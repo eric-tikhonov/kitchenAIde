@@ -5,21 +5,21 @@ import axios from "axios";
 import { API_URL } from "../utils";
 
 export const UpdateTaskForm = ({ editTaskListOnUpdate, isDialogOpen, setIsDialogOpen, task }) => {
-  const { id, completed } = task;
+  const { id, completed, createdAt } = task;
   const [taskName, setTaskName] = useState(task.name);
 
   const handleUpdateTaskName = useCallback(async () => {
     if (taskName === task.name) return;
 
     try {
-      const updatedTask = { id, name: taskName, completed };
+      const updatedTask = { id, name: taskName, completed, createdAt };
       await axios.put(API_URL, updatedTask);
       editTaskListOnUpdate(updatedTask);
       setTaskName(taskName);
     } catch (err) {
       console.log(err);
     }
-  }, [taskName, task, completed, editTaskListOnUpdate]);
+  }, [taskName, task, completed, createdAt, editTaskListOnUpdate]);
 
   const handleKeyDown = useCallback(async (e) => {
     if (e.key === "Enter" && taskName.trim()) {
@@ -30,11 +30,11 @@ export const UpdateTaskForm = ({ editTaskListOnUpdate, isDialogOpen, setIsDialog
 
   return (
     <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-      <DialogTitle>Edit Ingredient</DialogTitle>
+      <DialogTitle>Edit Task</DialogTitle>
       <div className="dialog">
         <TextField
           size="small"
-          label="Ingredient"
+          label="Task"
           variant="outlined"
           defaultValue={task.name}
           onChange={(e) => setTaskName(e.target.value)}

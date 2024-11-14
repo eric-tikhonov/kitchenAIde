@@ -12,20 +12,31 @@ export default function App() {
   const fetchTasks = useCallback(async () => {
     try {
       const { data } = await axios.get(API_URL);
-      setTasks(data);
+      const sortedTasks = data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      setTasks(sortedTasks);
     } catch (err) {
       console.log(err);
     }
   }, []);
+
+  const addTask = useCallback(async (newTask) => {
+    try {
+      await axios.post(API_URL, newTask);
+      fetchTasks();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [fetchTasks]);
 
   const editTaskListOnUpdate = useCallback((updatedTask, deleted = false) => {
     setTasks((prevTasks) => {
       if (deleted) {
         return prevTasks.filter((task) => task.id !== updatedTask.id);
       }
-      return prevTasks.map((task) =>
+      const updatedTasks = prevTasks.map((task) =>
         task.id === updatedTask.id ? updatedTask : task
       );
+      return updatedTasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     });
   }, []);
 
@@ -43,6 +54,7 @@ export default function App() {
             task={task}
             key={task.id}
             editTaskListOnUpdate={editTaskListOnUpdate}
+            fetchTasks={fetchTasks}
           />
         ))}
       </Stack>
