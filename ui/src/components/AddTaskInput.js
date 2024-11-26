@@ -36,7 +36,7 @@ export const AddTaskInput = ({ fetchTasks }) => {
       <TextField
         fullWidth
         size="medium"
-        label="Enter task"
+        label="Enter ingredients"
         variant="outlined"
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}

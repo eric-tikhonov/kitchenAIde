@@ -50,6 +50,21 @@ body,
   margin-bottom: 10px;
 }
 
+.recipe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--tan) !important;
+  backdrop-filter: blur(10px);
+  opacity: 0.8;
+  color: var(--navy) !important;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .taskButtons {
   display: flex;
   gap: 5px;
@@ -182,6 +197,11 @@ body,
   }
 
   .task {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .recipe {
     margin-top: 5px;
     margin-bottom: 5px;
   }
