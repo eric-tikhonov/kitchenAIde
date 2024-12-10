@@ -13,7 +13,11 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.675.0",
     "@aws-sdk/lib-dynamodb": "^3.675.0",
+    "@huggingface/hub": "^1.0.0",
+    "@huggingface/inference": "^2.8.1",
+    "axios": "^1.7.9",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "nodemon": "^3.1.7",
     "serverless-http": "^3.2.0"

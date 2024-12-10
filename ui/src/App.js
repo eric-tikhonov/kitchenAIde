@@ -11,10 +11,10 @@ import { Typography } from '@mui/material';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
-  const [recommendations, setRecommendations] = useState([
+  const [recommendations, setRecommendations] = useState([/*
     { id: 'rec1', name: 'Milk', completed: false, createdAt: new Date().toISOString() },
     { id: 'rec2', name: 'Eggs', completed: false, createdAt: new Date().toISOString() },
-  ]);
+  */]);
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
@@ -24,7 +24,7 @@ export default function App() {
       const sortedTasks = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setTasks(sortedTasks);
       fetchRecommendations(sortedTasks);
-      fetchRecipes();
+      //fetchRecipes();
     } catch (err) {
       console.log(err);
     }
@@ -50,16 +50,31 @@ export default function App() {
     );
   };
 
-  const fetchRecipes = async () => {
+  const fetchRecipes = async (ingredients) => {
     try {
-      //const { data } = await axios.get(`${API_URL}/recipes`);
-      //setRecipes(data);
-
+      /*
       const hardCodedRecipes = [
         { id: 'recipe1', title: 'French Toast', steps: 'Beat 2 eggs with 1/2 cup milk (add sugar, vanilla, or cinnamon if desired). Heat a pan with butter or oil over medium heat. Dip 4 bread slices in egg mixture. Cook bread until golden on both sides (2-3 minutes per side). Serve with toppings.' },
         { id: 'recipe2', title: 'Grilled Cheese Sandwhich', steps: 'Spread butter on 2 bread slices. Place 1 bread slice, buttered side down, in a pan over medium heat. Add 2-3 cheese slices. Top with the second bread slice, buttered side up. Cook until golden brown on both sides and cheese is melted (2-3 minutes per side).' },
       ];
       setRecipes(hardCodedRecipes);
+      */
+
+     //const { data } = await axios.post(`${API_URL}/recipes`);
+      //setRecipes(data);
+      console.log("ingredients");
+      console.log(ingredients);
+      try {
+        const response = await axios.post(`${API_URL}/generate-recipes`, {
+          ingredients,
+          numRecommendations: 0, // Set to 0 to only get recipes
+          numRecipes: 3
+        });
+        console.log(response.data.recipes);
+        setRecipes(response.data.recipes);
+      } catch (error) {
+        console.error('Error fetching recipes:', error);
+      }
     } catch (err) {
       console.log(err);
     }
