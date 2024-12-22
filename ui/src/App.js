@@ -27,6 +27,10 @@ export default function App() {
     }
   }, []);
 
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
   const fetchRecipes = async (ingredients) => {
     setRecommendations([]);
     setRecipes([]);
@@ -42,7 +46,7 @@ export default function App() {
         .slice(0, 3)
         .map((ingredient) => ({
           id: `rec-${uuidv4()}`,
-          name: ingredient.trim(),
+          name: capitalize(ingredient.trim()),
           completed: false,
           createdAt: new Date().toISOString(),
         }));
@@ -70,6 +74,7 @@ export default function App() {
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
     });
+    fetchRecipes(tasks.map((task) => task.name));
   }, []);
 
   useEffect(() => {
@@ -100,7 +105,7 @@ export default function App() {
           Regenerate AI Results
         </Button>
       </Box>
-      <Typography variant="h5" sx={{ mt: 0, mb: 2 }}>
+      <Typography variant="h5" sx={{ mt: 4, mb: 2 }}>
         {recommendations.length
           ? "Suggested Ingredients"
           : "Loading AI Results..."}
@@ -109,11 +114,13 @@ export default function App() {
         {recommendations.map((rec) => (
           <Task
             task={rec}
+            tasks={tasks}
             key={rec.id}
             editTaskListOnUpdate={editTaskListOnUpdate}
             fetchTasks={fetchTasks}
             isRecommendation
             removeRecommendation={removeRecommendation}
+            fetchRecipes={fetchRecipes}
           />
         ))}
       </Stack>

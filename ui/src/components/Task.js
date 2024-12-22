@@ -10,8 +10,10 @@ import { API_URL } from "../utils";
 
 export const Task = ({
   task,
+  tasks,
   fetchTasks,
   editTaskListOnUpdate,
+  fetchRecipes,
   isRecommendation,
   removeRecommendation
 }) => {
@@ -34,7 +36,7 @@ export const Task = ({
       if (isRecommendation) {
         removeRecommendation(id);
       } else {
-        await axios.delete(`${API_URL}/${task.id}`);
+        await axios.delete(`${API_URL}/task/${task.id}`);
         editTaskListOnUpdate(task, true);
       }
     } catch (err) {
@@ -70,25 +72,6 @@ export const Task = ({
         <div
           style={{ display: "flex", alignItems: "center", margin: "auto 0" }}
         >
-          {isRecommendation && (
-            <Typography
-              noWrap
-              variant="h4"
-              color="tan"
-              marginRight={1}
-              sx={{
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                textAlign: "left",
-                flexGrow: 1,
-                alignSelf: "center",
-                fontSize: "1.125rem",
-              }}
-            >
-              {"Recommendation:"}
-            </Typography>
-          )}
           <Typography
             noWrap
             variant="h4"
@@ -126,6 +109,7 @@ export const Task = ({
         isDialogOpen={isDialogOpen}
         setIsDialogOpen={setIsDialogOpen}
         task={task}
+        fetchRecipes={fetchRecipes}
       />
     </div>
   );
