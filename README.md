@@ -1,1 +1,1 @@
-This project showcases a dynamic, responsive To-Do List application built with React, designed to be hosted on AWS. It's a perfect practice ground for diving into specific AWS services like Lambda, DynamoDB, and Amplify.
+A dynamic, responsive app for managing ingredients and suggesting ingredients and recipes based on input using Claude 2.0 AI with AWS Bedrock, Lambda, DynamoDB, and Amplify.
