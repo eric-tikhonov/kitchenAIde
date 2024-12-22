@@ -7,12 +7,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+console.log("Starting server...");
+
 const app = express();
 const port = 3001;
 
 app.use(express.json());
 
-if (process.env.DEVELOPMENT) {
+if (process.env.DEVELOPMENT === 'true') {
   app.use(cors());
 }
 
@@ -66,32 +68,26 @@ app.delete("/task/:id", async (req, res) => {
 
 app.post("/generate-recipes", async (req, res) => {
   try {
-    const { ingredients, numRecommendations = 3, numRecipes = 3 } = req.body;
+    const { ingredients } = req.body;
     
-    // Generate additional ingredient recommendations
-    const additionalIngredientsList = await recommendIngredients(ingredients, numRecommendations);
+    const suggestedIngredients = await recommendIngredients(ingredients);
+    const recipes = await generateRecipes(ingredients);
     
-    // Combine the original and additional ingredients for each recommendation
-    const allIngredientsList = additionalIngredientsList.map(additionalIngredients => `${ingredients}, ${additionalIngredients}`);
-    
-    // Generate multiple recipes based on the combined ingredients
-    const recipes = [];
-    for (const allIngredients of allIngredientsList) {
-      const generatedRecipes = await generateRecipes(allIngredients, numRecipes);
-      recipes.push(...generatedRecipes);
-    }
-    
-    res.json({ recipes });
+    res.json({ recipes, suggestedIngredients });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to generate recipes' });
   }
 });
 
-if (process.env.DEVELOPMENT) {
+if (process.env.DEVELOPMENT === 'true') {
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   });
+} else {
+  console.log("Running in serverless mode");
 }
 
 export const handler = serverless(app);
+
+console.log("Server setup complete.");
