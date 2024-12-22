@@ -21,7 +21,7 @@ export const Task = ({
 
   const handleUpdateTaskCompletion = useCallback(async () => {
     try {
-      await axios.put(API_URL, { id, name, completed: !isComplete, createdAt });
+      await axios.put(`${API_URL}/task`, { id, name, completed: !isComplete, createdAt });
       setIsComplete((prev) => !prev);
       editTaskListOnUpdate({ id, name, completed: !isComplete, createdAt });
     } catch (err) {
@@ -49,7 +49,7 @@ export const Task = ({
         completed: false,
         createdAt: new Date().toISOString(),
       };
-      await axios.post(API_URL, newTask);
+      await axios.post(`${API_URL}/task`, newTask);
       fetchTasks();
       removeRecommendation(id);
     } catch (err) {

@@ -61,7 +61,7 @@ export async function generateRecipes(ingredients) {
                 "formattedRecipe": "1. 2 chicken breasts, sliced\n2. 1 onion, chopped\n3. 1 bell pepper, sliced\n4. 2 cloves garlic, minced\n5. 2 tbsp olive oil\n6. Salt and pepper to taste\n7. Stir-fry all ingredients until cooked through."
             }
         ],
-        "additionalSuggestedIngredientsList": [
+        "suggestedIngredients": [
             [
                 "Bell Pepper",
                 "Soy Sauce",
@@ -99,9 +99,16 @@ export async function generateRecipes(ingredients) {
     if (responseBody.content && responseBody.content[0] && responseBody.content[0].text) {
         const jsonResponse = responseBody.content[0].text;
         try {
-            const parsedResponse = JSON.parse(jsonResponse);
+            console.log('Raw JSON Response:', jsonResponse);
+
+            const jsonStartIndex = jsonResponse.indexOf('{');
+            const jsonEndIndex = jsonResponse.lastIndexOf('}') + 1;
+            const cleanJsonResponse = jsonResponse.substring(jsonStartIndex, jsonEndIndex);
+
+            const parsedResponse = JSON.parse(cleanJsonResponse);
             return parsedResponse.recipes;
         } catch (error) {
+            console.error('Failed to parse JSON response:', error);
             throw new Error('Failed to parse JSON response');
         }
     } else {

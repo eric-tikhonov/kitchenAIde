@@ -10,7 +10,7 @@ export const AddTaskInput = ({ fetchTasks }) => {
 
   const addNewTask = useCallback(async () => {
     try {
-      await axios.post(API_URL, {
+      await axios.post(`${API_URL}/task`, {
         name: newTask,
         completed: false,
         createdAt: new Date().toISOString(),

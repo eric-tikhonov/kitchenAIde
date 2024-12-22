@@ -1,17 +1,12 @@
 import React from "react";
-import { Typography, Button } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import classnames from "classnames";
 
 const Recipe = ({ recipe, onClick }) => {
   return (
-    <div
-      className={classnames("recipe")}
-      onClick={onClick}
-      sx={{ backgroundColor: "!important tan" }}
-    >
-      <div className={classnames("flex")}>
+    <Card className={classnames("recipe")} onClick={onClick} sx={{ backgroundColor: "tan" }}>
+      <CardContent>
         <Typography
-          noWrap
           variant="h5"
           sx={{
             overflow: "hidden",
@@ -24,10 +19,20 @@ const Recipe = ({ recipe, onClick }) => {
             fontWeight: "bold",
           }}
         >
-          {recipe.title}
+          {recipe.name}
         </Typography>
-      </div>
-    </div>
+        <Typography
+          variant="body1"
+          sx={{
+            whiteSpace: "pre-wrap",
+            textAlign: "left",
+            mt: 2,
+          }}
+        >
+          {recipe.formattedRecipe}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 
