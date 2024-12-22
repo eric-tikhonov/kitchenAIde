@@ -6,7 +6,7 @@ import axios from "axios";
 import { API_URL } from "./utils";
 import { PersistentDrawerLeft } from "./components/Drawer";
 import Stack from "@mui/material/Stack";
-import { Typography } from "@mui/material";
+import { Typography, Button, Box } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
@@ -28,6 +28,9 @@ export default function App() {
   }, []);
 
   const fetchRecipes = async (ingredients) => {
+    setRecommendations([]);
+    setRecipes([]);
+
     try {
       const response = await axios.post(`${API_URL}/generate-recipes`, {
         ingredients,
@@ -87,8 +90,20 @@ export default function App() {
           />
         ))}
       </Stack>
-      <Typography variant="h5" sx={{ mt: 4, mb: 2 }}>
-        {recipes.length ? "Suggested Ingredients" : "Loading..."}
+      <Box display="flex" justifyContent="center" sx={{ mt: 6 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => fetchRecipes(tasks.map((task) => task.name))}
+          disabled={!recommendations.length}
+        >
+          Regenerate AI Results
+        </Button>
+      </Box>
+      <Typography variant="h5" sx={{ mt: 0, mb: 2 }}>
+        {recommendations.length
+          ? "Suggested Ingredients"
+          : "Loading AI Results..."}
       </Typography>
       <Stack className="listItems">
         {recommendations.map((rec) => (
@@ -103,7 +118,7 @@ export default function App() {
         ))}
       </Stack>
       <Typography variant="h5" sx={{ mt: 4, mb: 2 }}>
-        {recipes.length ? "Suggested Recipes" : "Loading..."}
+        {recipes.length ? "Suggested Recipes" : "Loading AI Results..."}
       </Typography>
       <Stack className="recipeTitles">
         {recipes.map((recipe) => (

@@ -13,7 +13,7 @@ export const UpdateTaskForm = ({ editTaskListOnUpdate, isDialogOpen, setIsDialog
 
     try {
       const updatedTask = { id, name: taskName, completed, createdAt };
-      await axios.put(API_URL, updatedTask);
+      await axios.put(`${API_URL}/task`, updatedTask);
       editTaskListOnUpdate(updatedTask);
       setTaskName(taskName);
     } catch (err) {
